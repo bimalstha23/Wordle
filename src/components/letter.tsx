@@ -1,10 +1,11 @@
 import React from 'react'
 
 export const Letter = (props: any) => {
-    const { Letterpos, Attempvalue } = props
+    const { attempPos, Attempvalue } = props
+    console.log(attempPos, Attempvalue)
     return (
         <div className='letter'>
-            <div>{Letterpos}</div>
+            <div>{attempPos}</div>
         </div>
     )
 }

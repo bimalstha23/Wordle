@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  } from 'react'
 // import { boardContentDefault } from '../config/words';
 import { Letter } from './letter';
 
