@@ -10,7 +10,7 @@ function App() {
       <NavBar />
       <div className="game">
         <Board />
-        <Keyboard />
+        {/* <Keyboard /> */}
       </div>
     </div>
   );
