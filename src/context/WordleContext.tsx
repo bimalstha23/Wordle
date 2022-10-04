@@ -1,10 +1,12 @@
-import React, { useContext, useState, createContext } from 'react'
+import React, { useContext, useState, createContext, } from 'react'
 import { boardContentDefault } from '../config/words';
 type WordleContextType = {
     onKeyClick: (key: string) => any;
     onBackspaceClick: () => void
     onClearClick: () => void
     onEnterClick: () => void
+    handleKeyBoard?: (e: any) => any
+    attempPos: number
     firstRow: string[]
     secondRow: string[]
     thirdRow: string[]
@@ -21,6 +23,8 @@ const WordleContext = createContext<WordleContextType>({
     onBackspaceClick: () => { },
     onClearClick: () => { },
     onEnterClick: () => { },
+    handleKeyBoard: () => { },
+    attempPos: 0,
     firstRow: [],
     secondRow: [],
     thirdRow: [],
@@ -32,13 +36,11 @@ export const WordleContextProvider = ({ children }: WordleProviderProps) => {
     const [Board, setBoard] = useState(boardContentDefault);
     const [attempPos, setAttempPos] = useState(0)
     const [letterPos, setLetterPos] = useState(0)
-
     const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
     const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
     const thirdRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
     const onKeyClick = (letter: string) => {
-        console.log("letter", letter)
         if (attempPos <= 4) {
             const newBoard = [...Board];
             newBoard[attempPos][letterPos] = letter;
@@ -63,11 +65,13 @@ export const WordleContextProvider = ({ children }: WordleProviderProps) => {
         console.log('clear')
     }
     const onEnterClick = () => {
-        if(attempPos<= 4) return;
+        if (attempPos <= 4) return;
         console.log('enter')
         setLetterPos(letterPos + 1);
         setAttempPos(0);
     }
+
+
 
     const values = {
         onKeyClick,
@@ -78,6 +82,7 @@ export const WordleContextProvider = ({ children }: WordleProviderProps) => {
         secondRow,
         thirdRow,
         Board,
+        attempPos
     }
 
     return (
