@@ -6,13 +6,12 @@ type WordleContextType = {
     onClearClick: () => void
     onEnterClick: () => void
     handleKeyBoard?: (e: any) => any
-    attempPos: number
+    attempPos: number 
     firstRow: string[]
     secondRow: string[]
     thirdRow: string[]
     Board: string[][]
 }
-
 
 type WordleProviderProps = {
     children: React.ReactNode
@@ -36,6 +35,11 @@ export const WordleContextProvider = ({ children }: WordleProviderProps) => {
     const [Board, setBoard] = useState(boardContentDefault);
     const [attempPos, setAttempPos] = useState(0)
     const [letterPos, setLetterPos] = useState(0)
+    // const [gameOver, setGameOver] = useState({
+    //     gameOver: false,
+    //     message: '',
+    //     currectGuess: false
+    // })
     const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
     const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
     const thirdRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
@@ -66,12 +70,14 @@ export const WordleContextProvider = ({ children }: WordleProviderProps) => {
     }
     const onEnterClick = () => {
         if (attempPos <= 4) return;
-        console.log('enter')
+        let currentWord:string = '';
+        for(let i = 0; i < 5; i++){
+            currentWord += Board[i][letterPos];
+        }
+
         setLetterPos(letterPos + 1);
         setAttempPos(0);
     }
-
-
 
     const values = {
         onKeyClick,
